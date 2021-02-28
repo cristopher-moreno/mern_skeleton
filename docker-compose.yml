@@ -1,0 +1,51 @@
+version: "3.8"
+services:
+  mongo:
+    image: mongo
+    container_name: mongo_server
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: 'root'
+      MONGO_INITDB_ROOT_PASSWORD: 'example' 
+    ports: 
+      - 27017:27017 
+    volumes:
+      - mongo_vol
+    networks:
+      - internal
+  
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express_server
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: 'root'
+      ME_CONFIG_MONGODB_ADMINPASSWORD: 'example'  
+    volumes:
+      - me_vol
+    networks:
+      - internal
+
+  node:
+    image: node
+    container_name: node_server
+    working_dir: /home/node/app
+    volumes:
+      # host:container
+      - ./:/home/node/app
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongo
+      - mongo-express
+    #run everything 
+    command: yarn development
+    networks:
+      - internal
+
+volumes:
+  mongo_vol: {}
+  me_vol: {}
+
+networks:
+  internal: {}
