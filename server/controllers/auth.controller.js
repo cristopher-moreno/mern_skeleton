@@ -45,7 +45,6 @@ const signin = async (req, res) => {
     }
 }
 
-
 const signout = (req, res) => {
     res.clearCookie("t")
     return res.status('200').json({
@@ -55,6 +54,7 @@ const signout = (req, res) => {
 
 const requireSignin = expressJwt({
     secret: config.jwtSecret,
+    algorithms: ['RS256'],
     userProperty: 'auth'
 })
 
@@ -74,4 +74,3 @@ export default {
     requireSignin,
     hasAuthorization
 }
-
