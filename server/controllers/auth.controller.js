@@ -8,12 +8,18 @@ const signin = async (req, res) => {
         let user = await User.findOne({
             "email": req.body.email
         })
+
+        console.log(`el usuario es: ${user}`)
+
         if (!user)
             return res.status('401').json({
                 error: "User not found"
             })
 
         if (!user.authenticate(req.body.password)) {
+
+            console.log(req.body.password)
+
             return res.status('401').send({
                 error: "Email and password don't match."
             })
@@ -52,9 +58,10 @@ const signout = (req, res) => {
     })
 }
 
+//https://stackoverflow.com/questions/39874731/unauthorizederror-invalid-algorithm-express-jwt
 const requireSignin = expressJwt({
     secret: config.jwtSecret,
-    algorithms: ['RS256'],
+    algorithms: ['sha1', 'RS256', 'HS256'],
     userProperty: 'auth'
 })
 

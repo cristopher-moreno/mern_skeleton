@@ -15,7 +15,7 @@ const create = async (req, res) => {
         console.log(err)
 
         return res.status(400).json({
-            error: errorHandler.getErrorMessage(err)
+            message: errorHandler.getErrorMessage(err)
         })
     }
 }

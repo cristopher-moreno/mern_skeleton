@@ -3,14 +3,11 @@ services:
   mongo:
     image: mongo
     container_name: mongo_server
-#    environment:
-#      MONGO_INITDB_DATABASE: menrproject
-#      MONGO_INITDB_ROOT_USERNAME: root
-#      MONGO_INITDB_ROOT_PASSWORD: example
     ports:
       - 27017:27017
     volumes:
-      - mongo_vol
+      # Named_volume:container
+      - mongo_vol:/data/db
     networks:
       - internal
 
@@ -22,8 +19,6 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: "root"
       ME_CONFIG_MONGODB_ADMINPASSWORD: "example"
-    volumes:
-      - me_vol
     networks:
       - internal
 
@@ -45,8 +40,9 @@ services:
       - internal
 
 volumes:
+  # https://docs.docker.com/compose/compose-file/compose-file-v3/
+  # Ctrl-F: [SOURCE:]TARGET[:MODE]
   mongo_vol: {}
-  me_vol: {}
 
 networks:
   internal: {}
