@@ -3,7 +3,7 @@ import extend from 'lodash/extend'
 import errorHandler from './../helpers/dbErrorHandler'
 
 const create = async (req, res) => {
- 
+
     const user = new User(req.body)
     try {
         await user.save()
@@ -51,9 +51,15 @@ const read = (req, res) => {
 
 const list = async (req, res) => {
     try {
+
         let users = await User.find().select('name email updated created')
+
         res.json(users)
+
     } catch (err) {
+
+        console.log(err)
+
         return res.status(400).json({
             error: errorHandler.getErrorMessage(err)
         })

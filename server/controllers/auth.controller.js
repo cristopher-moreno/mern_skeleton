@@ -9,7 +9,7 @@ const signin = async (req, res) => {
             "email": req.body.email
         })
 
-        console.log(`el usuario es: ${user}`)
+        //console.log(`el usuario es: ${user}`)
 
         if (!user)
             return res.status('401').json({

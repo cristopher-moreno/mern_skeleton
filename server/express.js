@@ -22,7 +22,6 @@ app.use(cors())
 app.use('/', userRoutes)
 app.use('/', authRoutes)
 
-//Nodemon is trackin: /server (folder)
 app.get('/', (req, res) => {
     res.status(200).send(Template())
 })
@@ -31,13 +30,13 @@ app.get('/', (req, res) => {
 app.use((err, req, res, next) => {
     if (err.name === 'UnauthorizedError') {
 
-        console.log('I AM HERE')
-
         res.status(401).json({ "error": err.name + ": " + err.message })
-        
+
     } else if (err) {
+
         res.status(400).json({ "error": err.name + ": " + err.message })
         console.log(err)
+
     }
 })
 
