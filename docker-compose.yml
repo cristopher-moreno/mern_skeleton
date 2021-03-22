@@ -38,6 +38,8 @@ services:
     command: yarn development
     networks:
       - internal
+    environment: #https://github.com/facebook/create-react-app/issues/8688 (control + F: CI=true)
+      - CI=true
 
 volumes:
   # https://docs.docker.com/compose/compose-file/compose-file-v3/
