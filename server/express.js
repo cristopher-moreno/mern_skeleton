@@ -23,7 +23,11 @@ import theme from './../client/theme'
 import devBundle from './devBundle'
 
 const CURRENT_WORKING_DIR = process.cwd()
-const app = express()
+//const app = express()
+
+//https://daquinoaldo.github.io/https-localhost/
+const app = require("https-localhost")()
+
 
 //comment out before building for production
 devBundle.compile(app)
@@ -36,7 +40,7 @@ app.use(compress())
 // secure apps by setting various HTTP headers
 app.use(helmet())
 // enable CORS - Cross Origin Resource Sharing
-app.use(cors())
+//app.use(cors())
 
 app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 
@@ -45,6 +49,7 @@ app.use('/', userRoutes)
 app.use('/', authRoutes)
 
 app.get('*', (req, res) => {
+
     const sheets = new ServerStyleSheets()
     const context = {}
     const markup = ReactDOMServer.renderToString(

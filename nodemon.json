@@ -1,8 +1,7 @@
 {
     "verbose": false,
     "watch": [
-        "./server",
-        "./client"
+        "./server"
     ],
-    "exec": "webpack --mode=development --config webpack.config.server.js && node ./dist/server.generated.js"
+    "exec": "webpack --mode=none --config webpack.config.server.js && node ./dist/server.generated.js"
 }
