@@ -43,7 +43,7 @@ export default function Home() {
     return (
         <Card className={classes.card}>
             <Typography variant="h6" className={classes.title}>
-                Home Page - WELCOME CRISTOPHER
+                Hello There 🌟
             </Typography>
 
             <CardMedia
@@ -53,7 +53,7 @@ export default function Home() {
 
             <CardContent>
                 <Typography variant="body1" component="p">
-                    Welcome Human :) 🧡
+                    Street Fighters 💪
               </Typography>
             </CardContent>
 

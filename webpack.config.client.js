@@ -14,8 +14,8 @@ const config = {
     ],
     output: {
         path: path.join(CURRENT_WORKING_DIR, '/dist'),
+        publicPath: '/dist/',
         filename: 'bundle.js',
-        publicPath: '/dist/'
     },
     module: {
         rules: [
@@ -23,7 +23,12 @@ const config = {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 use: [
-                    'babel-loader'
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            plugins: ['react-refresh/babel']
+                        },
+                    },
                 ]
             },
             {
@@ -39,7 +44,7 @@ const config = {
                 ],
             }
         ],
-        
+
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
@@ -50,7 +55,17 @@ const config = {
         alias: {
             'react-dom': '@hot-loader/react-dom'
         }
-    }
+    },
+    devServer: {
+        port: 3000,
+        contentBase: "./client/",
+        open: true,             // Automatically open the browser
+        hot: true,
+        hotOnly: true,
+        inline: true,
+        stats: "errors-only",
+        watchContentBase: true,
+    },
 }
 
 module.exports = config
