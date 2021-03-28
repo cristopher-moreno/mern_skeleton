@@ -20,6 +20,7 @@ const config = {
                 exclude: /node_modules/,
                 use: ['babel-loader']
             },
+            //https://webpack.js.org/loaders/url-loader/
             {
                 test: /\.(png|jpg|gif|svg)$/i,
                 use: [

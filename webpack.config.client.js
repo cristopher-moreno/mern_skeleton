@@ -1,6 +1,8 @@
 const path = require('path')
 const webpack = require('webpack')
 const CURRENT_WORKING_DIR = process.cwd()
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+
 
 const config = {
     name: "browser",
@@ -36,11 +38,13 @@ const config = {
                     },
                 ],
             }
-        ]
+        ],
+        
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoEmitOnErrorsPlugin()
+        new webpack.NoEmitOnErrorsPlugin(),
+        new ReactRefreshWebpackPlugin()
     ],
     resolve: {
         alias: {
